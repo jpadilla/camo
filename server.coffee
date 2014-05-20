@@ -265,7 +265,7 @@ server = Http.createServer (req, resp) ->
         process_url url, transferredHeaders, resp, max_redirects
       else
         four_oh_four(resp, "checksum mismatch #{hmac_digest}:#{query_digest}")
-    else if '*' in allowed_referers or req.headers.referer in allowed_referers
+    else if '*' in allowed_referers or Url.parse(req.headers.referer).host in allowed_referers
       url = Url.parse dest_url
       process_url url, transferredHeaders, resp, max_redirects
     else
